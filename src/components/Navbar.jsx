@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Home, Search, User, ShoppingCart, HelpCircle, BadgePercent } from 'lucide-react';
 import { Link } from 'react-router-dom';
-const Navbar = () => {
+const Navbar = ({ setShowLogin }) => {
   // State to control side panel visibility
   const [isLocationPanelOpen, setIsLocationPanelOpen] = useState(false);
   // Cart item count for badge
@@ -18,6 +18,11 @@ const Navbar = () => {
       e.preventDefault();
       action();
     }
+  };
+
+  // Handle signin button click
+  const handleSigninClick = () => {
+    setShowLogin(true);
   };
 
   return (
@@ -87,16 +92,25 @@ const Navbar = () => {
               </Link>
               
                 {/* Sign In */}
-                <Link to="/signin" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Sign in to your account">
-                  <User className="w-5 h-5" />
-                  <span className="font-semibold text-base">Sign In</span>
-                </Link>
+                <button 
+                  onClick={handleSigninClick}
+                  className="flex items-center space-x-1 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 font-semibold text-sm"
+                  aria-label="Sign in to your account"
+                >
+                  <User className="w-4 h-4" />
+                  <span>Sign In</span>
+                </button>
               </div>
 
               {/* Mobile Sign In */}
-              <Link to="/signin" className="md:hidden flex items-center gap-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Sign in to your account">Sign In
-                <User className="w-5 h-5" />
-              </Link>
+              <button 
+                onClick={handleSigninClick}
+                className="md:hidden flex items-center space-x-1 bg-orange-500 hover:bg-orange-600 text-white px-3 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 font-semibold text-sm"
+                aria-label="Sign in to your account"
+              >
+                <User className="w-4 h-4" />
+                <span>Sign In</span>
+              </button>
               
               {/* Mobile Hamburger for Location */}
               <button 
