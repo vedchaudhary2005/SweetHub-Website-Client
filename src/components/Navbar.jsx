@@ -4,23 +4,33 @@ import { Link } from 'react-router-dom';
 const Navbar = () => {
   // State to control side panel visibility
   const [isLocationPanelOpen, setIsLocationPanelOpen] = useState(false);
+  // Cart item count for badge
+  const [cartCount] = useState(0);
 
   // Toggle location panel
   const toggleLocationPanel = () => {
     setIsLocationPanelOpen(!isLocationPanelOpen);
   };
 
+  // Handle keyboard navigation
+  const handleKeyDown = (e, action) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      action();
+    }
+  };
+
   return (
     <>
       {/* Main Navbar - Full Width and Fixed */}
-      <nav className="bg-white shadow-md fixed top-0 left-0 right-0 w-full z-50">
-        <div className="w-full px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+      <nav className="bg-white border-b border-gray-200 fixed top-0 left-0 right-0 w-full z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
             
             {/* Left Section - Logo and Navigation */}
             <div className="flex items-center space-x-8">
               {/* Logo Placeholder */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 px-2 sm:px-0">
                 <div className="text-2xl font-bold text-orange-500">SweetHub</div>
               </div>
               
@@ -28,12 +38,14 @@ const Navbar = () => {
               <div className="hidden md:flex items-center">
                 <button 
                   onClick={toggleLocationPanel}
-                  className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors"
+                  onKeyDown={(e) => handleKeyDown(e, toggleLocationPanel)}
+                  aria-label="Select location"
+                  className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
-                  <span className="text-sm">Location</span>
+                  <span className="text-base font-semibold">Location</span>
                 </button>
               </div>
             </div>
@@ -43,51 +55,55 @@ const Navbar = () => {
               {/* Desktop Navigation Items */}
               <div className="hidden md:flex items-center space-x-4">
                 {/* Home */}
-                <a href="#" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors">
-                  <Home className="w-4 h-4" />
-                  <span>Home</span>
-                </a>
+                <Link to="/" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Go to home page">
+                  <Home className="w-5 h-5" />
+                  <span className="font-semibold text-base">Home</span>
+                </Link>
                 
                 {/* Search */}
                 <Link 
                   to="/search"
-                  className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors"
+                  className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1"
+                  aria-label="Search for sweets and shops"
                 >
-                  <Search className="w-4 h-4" />
-                  <span>Search</span>
+                  <Search className="w-5 h-5" />
+                  <span className="font-semibold text-base">Search</span>
                 </Link>
-                
-                {/* Offers */}
-                <a href="#" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors">
-                  <BadgePercent className="w-4 h-4" />
-                  <span>Offers</span>
-                </a>
-                
+
                 {/* Help */}
-                <button className="text-gray-700 hover:text-orange-500 transition-colors">
+                <Link to="/help" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Get help">
                   <HelpCircle className="w-5 h-5" />
-                </button>
-                
-                {/* Sign In */}
-                <button className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors">
-                  <User className="w-4 h-4" />
-                  <span>Sign In</span>
-                </button>
-              </div>
-              
+                  <span className="font-semibold text-base">Help</span>
+                </Link>
+          
               {/* Cart (Always visible) */}
-              <button className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors">
+              <Link to="/cart" className="relative flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label={`Cart with ${cartCount} items`}>
                 <ShoppingCart className="w-5 h-5" />
-                <span className="hidden sm:inline">Cart</span>
-              </button>
+                <span className="hidden sm:inline font-semibold text-base">Cart</span>
+                {/* Cart Badge - Always show count */}
+                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                  {cartCount > 9 ? '9+' : cartCount}
+                </span>
+              </Link>
               
-              {/* Mobile Sign Up */}
-              <button className="md:hidden text-gray-700 hover:text-orange-500 transition-colors">Sign Up</button>
+                {/* Sign In */}
+                <Link to="/signin" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Sign in to your account">
+                  <User className="w-5 h-5" />
+                  <span className="font-semibold text-base">Sign In</span>
+                </Link>
+              </div>
+
+              {/* Mobile Sign In */}
+              <Link to="/signin" className="md:hidden flex items-center gap-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Sign in to your account">Sign In
+                <User className="w-5 h-5" />
+              </Link>
               
               {/* Mobile Hamburger for Location */}
               <button 
                 onClick={toggleLocationPanel}
-                className="md:hidden text-gray-700 hover:text-orange-500 transition-colors"
+                onKeyDown={(e) => handleKeyDown(e, toggleLocationPanel)}
+                aria-label="Select location"
+                className="md:hidden text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md p-1"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -100,7 +116,7 @@ const Navbar = () => {
       </nav>
       
       {/* Spacer to prevent content from hiding behind fixed navbar */}
-      <div className="h-16"></div>
+      <div className="h-20"></div>
 
       {/* Location Side Panel */}
       <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isLocationPanelOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
@@ -117,7 +133,9 @@ const Navbar = () => {
             <h2 className="text-lg font-semibold text-gray-800">Select Location</h2>
             <button 
               onClick={toggleLocationPanel}
-              className="text-gray-500 hover:text-gray-700 transition-colors"
+              onKeyDown={(e) => handleKeyDown(e, toggleLocationPanel)}
+              aria-label="Close location panel"
+              className="text-gray-500 hover:text-gray-700 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 rounded-md p-1"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -145,7 +163,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </>
   );
 };
