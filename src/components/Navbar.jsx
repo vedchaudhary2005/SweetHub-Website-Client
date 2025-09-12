@@ -21,7 +21,8 @@ const Navbar = ({ setShowLogin }) => {
   };
 
   // Handle signin button click
-  const handleSigninClick = () => {
+  const handleSigninClick = () => {  
+    
     setShowLogin(true);
   };
 

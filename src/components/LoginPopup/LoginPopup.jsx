@@ -114,21 +114,37 @@ const LoginPopup = ({ setShowLogin }) => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
+            className="w-full bg-orange-500 hover:bg-orange-900 text-white font-semibold py-2 px-4 rounded-md transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2"
           >
             {isLogin ? 'Login' : 'Create Account'}
           </button>
         </form>
 
         {/* Toggle Link */}
-        <div className="text-center mt-4">
-          <button
-            onClick={() => setIsLogin(!isLogin)}
-            className="text-orange-500 hover:text-orange-600 text-sm font-medium transition-colors"
-          >
-            {isLogin ? "Don't have an account? Sign up here" : "Already have an account? Login here" }
-          </button>
-        </div>
+     <div className="text-center mt-4">
+  {isLogin ? (
+    <p className="text-sm font-medium">
+      Don't have an account?{" "}
+      <button
+        onClick={() => setIsLogin(false)}
+        className="text-orange-500 hover:text-orange-900 transition-colors"
+      >
+        Sign up here
+      </button>
+    </p>
+  ) : (
+    <p className="text-sm font-medium">
+      Already have an account?{" "}
+      <button
+        onClick={() => setIsLogin(true)}
+        className="text-orange-500 hover:text-orange-900 transition-colors"
+      >
+        Login here
+      </button>
+    </p>
+  )}
+</div>
+
       </div>
     </div>
   );
