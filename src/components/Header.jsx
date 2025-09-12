@@ -8,10 +8,10 @@ const Header = () => {
   // IMAGE INSERTION POINT: Add new images to this array
   // Each new image will automatically create a corresponding dot in pagination
   const images = [
-    '/src/assets/Header2.png',
-    '/src/assets/Header1.png', 
-    '/src/assets/Header1.png', 
-    '/src/assets/Header1.png'
+     '/Header2.png',
+    '/Header1.png', 
+    '/Header1.png', 
+    '/Header1.png'
     // Add more images here: '/assets/image4.jpg', '/assets/image5.jpg', etc.
   ]
 
