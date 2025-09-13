@@ -40,7 +40,7 @@ const Header = () => {
     <div className="w-full">
       {/* HEADER TEXT - Above slider, centered and responsive */}
       <div className="text-center mb-6 px-4">
-        <h1 className="font-bold text-left text-xl sm:text-2xl lg:text-3xl text-gray-800">
+        <h1 className="font-bold text-left text-xl sm:text-xl lg:text-3xl text-gray-800">
           Order your favourite Sweet Here
         </h1>
       </div>
