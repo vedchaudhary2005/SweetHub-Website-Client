@@ -4,10 +4,10 @@ import { CheckCircle } from 'lucide-react'
 const Toast = ({ message, isVisible, onClose }) => {
   useEffect(() => {
     if (isVisible) {
-      // Auto-hide toast after 3 seconds
+      // Auto-hide toast after 1 seconds
       const timer = setTimeout(() => {
         onClose()
-      }, 3000)
+      }, 1000)
 
       return () => clearTimeout(timer)
     }

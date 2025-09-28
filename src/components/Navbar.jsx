@@ -143,6 +143,44 @@ const Navbar = ({ setShowLogin }) => {
       {/* Spacer to prevent content from hiding behind fixed navbar */}
       <div className="h-20"></div>
 
+      {/* Mobile Bottom Navigation Bar - Only visible on mobile screens */}
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 rounded-t-2xl shadow-lg">
+        <div className="flex justify-around items-center py-2 px-4">
+          
+          {/* Search Navigation */}
+          <Link 
+            to="/search"
+            className="flex flex-col items-center py-2 px-4 text-gray-600 hover:text-orange-500 transition-colors"
+            aria-label="Go to search page"
+          >
+            <Search className="w-6 h-6 mb-1" />
+            <span className="text-xs font-medium">Search</span>
+          </Link>
+          
+          {/* Cart Navigation with Badge */}
+          <Link 
+            to="/cart"
+            className="relative flex flex-col items-center py-2 px-4 text-gray-600 hover:text-orange-500 transition-colors"
+            aria-label={`Cart with ${cartCount} items`}
+          >
+            <div className="relative">
+              <ShoppingCart className="w-6 h-6 mb-1" />
+              {/* Cart Badge - Show count only if items exist */}
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                  {cartCount > 9 ? '9+' : cartCount}
+                </span>
+              )}
+            </div>
+            <span className="text-xs font-medium">Cart</span>
+          </Link>
+          
+        </div>
+      </div>
+
+      {/* Bottom spacer for mobile navigation - Only on mobile screens */}
+      <div className="md:hidden h-16"></div>
+
       {/* Location Side Panel */}
       <div className={`fixed inset-0 z-50 transition-opacity duration-300 ${isLocationPanelOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
         {/* Backdrop */}

@@ -6,11 +6,11 @@ const Footer = () => {
     // Fixed footer at bottom with 100% width and no gaps
     <footer className="bg-gray-100 text-gray-800 py-8 w-full bottom-0 left-0 right-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content - Responsive Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8">
+        {/* Main Footer Content - Horizontal Flex Layout */}
+        <div className="flex flex-wrap justify-between gap-8">
           
           {/* Left Section - Logo and Copyright */}
-          <div className="lg:col-span-2">
+          <div className="flex-shrink-0">
             <div className="mb-4">
               {/* Logo Placeholder */}
               <h2 className="text-2xl font-bold text-orange-500 mb-2">SweetHub</h2>
