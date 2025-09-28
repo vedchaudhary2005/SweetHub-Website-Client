@@ -147,6 +147,16 @@ const Navbar = ({ setShowLogin }) => {
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-200 rounded-t-2xl shadow-lg">
         <div className="flex justify-around items-center py-2 px-4">
           
+          {/* Home Navigation - Mobile only */}
+          <Link 
+            to="/"
+            className="flex flex-col items-center py-2 px-4 text-gray-600 hover:text-orange-500 transition-colors"
+            aria-label="Go to home page"
+          >
+            <Home className="w-6 h-6 mb-1" />
+            <span className="text-xs font-medium">Home</span>
+          </Link>
+          
           {/* Search Navigation */}
           <Link 
             to="/search"
