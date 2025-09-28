@@ -104,12 +104,12 @@ const Header = () => {
         <div className="max-w-full">
           {/* Main heading - Left aligned, inline, responsive font size */}
           <h2 className="font-bold text-2xl sm:text-3xl mb-4 text-gray-800 text-left whitespace-nowrap">
-            Explore Sweet Shops Menu
+            Explore Our Sweets Menu
           </h2>
           
           {/* Description text - Left aligned, proper line wrapping */}
           <p className="text-base sm:text-lg text-gray-600 leading-relaxed text-left max-w-4xl">
-            Choose from a menu featuring a delectable array of shops. Our mission is to satisfy your craving and elevate your dining experience one delicious meal at a time.
+            Choose from a menu featuring a delectable array of sweets. Our mission is to satisfy your craving and elevate your dining experience one delicious meal at a time.
           </p>
         </div>
       </div>

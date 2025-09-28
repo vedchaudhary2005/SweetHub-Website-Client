@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import { Home, Search, User, ShoppingCart, HelpCircle, BadgePercent } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useCart } from '../hooks/useCart';
 const Navbar = ({ setShowLogin }) => {
+  const navigate = useNavigate();
+  const { getCartCount } = useCart();
   // State to control side panel visibility
   const [isLocationPanelOpen, setIsLocationPanelOpen] = useState(false);
-  // Cart item count for badge
-  const [cartCount] = useState(0);
+  // Get dynamic cart count
+  const cartCount = getCartCount();
 
   // Toggle location panel
   const toggleLocationPanel = () => {
@@ -22,8 +25,12 @@ const Navbar = ({ setShowLogin }) => {
 
   // Handle signin button click
   const handleSigninClick = () => {  
-    
     setShowLogin(true);
+  };
+
+  // Navigate to search page
+  const handleSearchClick = () => {
+    navigate('/search');
   };
 
   return (
@@ -66,15 +73,15 @@ const Navbar = ({ setShowLogin }) => {
                   <span className="font-semibold text-base">Home</span>
                 </Link>
                 
-                {/* Search */}
-                <Link 
-                  to="/search"
+                {/* Search - Navigate to search page */}
+                <button 
+                  onClick={handleSearchClick}
                   className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1"
-                  aria-label="Search for sweets and shops"
+                  aria-label="Go to search page"
                 >
                   <Search className="w-5 h-5" />
                   <span className="font-semibold text-base">Search</span>
-                </Link>
+                </button>
 
                 {/* Help */}
                 <Link to="/help" className="flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label="Get help">
@@ -86,10 +93,12 @@ const Navbar = ({ setShowLogin }) => {
               <Link to="/cart" className="relative flex items-center space-x-1 text-gray-700 hover:text-orange-500 transition-colors focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-md px-2 py-1" aria-label={`Cart with ${cartCount} items`}>
                 <ShoppingCart className="w-5 h-5" />
                 <span className="hidden sm:inline font-semibold text-base">Cart</span>
-                {/* Cart Badge - Always show count */}
-                <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                  {cartCount > 9 ? '9+' : cartCount}
-                </span>
+                {/* Cart Badge - Show count only if items exist */}
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                    {cartCount > 9 ? '9+' : cartCount}
+                  </span>
+                )}
               </Link>
               
                 {/* Sign In */}
@@ -127,6 +136,7 @@ const Navbar = ({ setShowLogin }) => {
             </div>
           </div>
         </div>
+
 
       </nav>
       
