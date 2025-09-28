@@ -7,7 +7,7 @@ const Toast = ({ message, isVisible, onClose }) => {
       // Auto-hide toast after 1 seconds
       const timer = setTimeout(() => {
         onClose()
-      }, 1000)
+      }, 1500)
 
       return () => clearTimeout(timer)
     }
