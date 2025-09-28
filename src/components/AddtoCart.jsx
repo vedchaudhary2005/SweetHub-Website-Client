@@ -31,8 +31,22 @@ const AddtoCart = () => {
               <div key={item.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-4 sm:p-6 border-b border-gray-200 last:border-b-0 space-y-4 sm:space-y-0">
                 {/* Item Details - Mobile: full width, Desktop: left side */}
                 <div className="flex items-center space-x-4 flex-1">
-                  <div className="w-16 h-16 sm:w-16 sm:h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-orange-600 text-xs font-medium">Sweet</span>
+                  {/* Sweet Image - Display actual image from cart item */}
+                  <div className="w-16 h-16 sm:w-16 sm:h-16 rounded-lg overflow-hidden flex-shrink-0 bg-gray-200">
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        // Fallback to gradient background if image fails to load
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'flex';
+                      }}
+                    />
+                    {/* Fallback placeholder - hidden by default, shown only if image fails */}
+                    <div className="w-full h-full bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center" style={{display: 'none'}}>
+                      <span className="text-orange-600 text-xs font-medium">Sweet</span>
+                    </div>
                   </div>
                   <div className="flex-1 min-w-0">
                     <h3 className="font-semibold text-lg text-gray-800 truncate">{item.name}</h3>
